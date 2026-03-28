@@ -8,18 +8,7 @@ using UnityEngine;
 public class Chess : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer Icon;
-    [SerializeField]
-    private Sprite[] Icons;
-
-    [SerializeField]
-    private SpriteRenderer LevelFrame;
-    [SerializeField]
-    private Sprite[] Frames;
-
-    [SerializeField]
     private SpriteRenderer[] LevelBar;
-    private Color[] BarColor = new Color[5] { new(0.65f, 1, 1, 1), new(0.65f, 0.7f, 1, 1), new(1f, 0.65f, 0.65f, 1), new(0.65f, 1, 1, 1), new(0.6f, 0.4f, 0.1f, 1) };
 
     /// <summary>
     /// 所属阵营
@@ -29,9 +18,9 @@ public class Chess : MonoBehaviour
     /// <summary>
     /// 元素
     /// </summary>
-    private Element Element;
+    protected Element Element = Element.无;
 
-    private int Level = 1;
+    protected int Level = 1;
     public void LevelUp()
     {
         LevelBar[Level++].enabled = true;
@@ -81,9 +70,6 @@ public class Chess : MonoBehaviour
         if(Element == Element.无)
         {
             Element = e;
-            Icon.sprite = Icons[(int)e];
-            LevelFrame.sprite = Frames[(int)e];
-            LevelBar[0].color = LevelBar[1].color = LevelBar[2].color = LevelBar[3].color = BarColor[(int)e];
         }
         else if(Element == e)
         {
@@ -100,8 +86,12 @@ public class Chess : MonoBehaviour
     /// </summary>
     public void Kill()
     {
-        InTile.Chess = null;//消除引用
         Destroy(gameObject);
+    }
+
+    public void OnDestroy()
+    {
+        if(InTile != null && InTile.Chess == this) InTile.Chess = null;//消除引用
     }
 }
 
