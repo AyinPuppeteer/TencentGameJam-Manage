@@ -421,6 +421,7 @@ MonoBehaviour:
   - {fileID: 2398822972630363002, guid: 1e4ddfe466860004aae091bdffb8a5b5, type: 3}
   - {fileID: 2398822972630363002, guid: e74e90f5360a18e4b9be79945c254551, type: 3}
   - {fileID: 2398822972630363002, guid: b18001ba9cafb224eb5357503745313f, type: 3}
+  ElementorPrefab: {fileID: 9007098213994736157, guid: b1d9082f66351ba498a15239f2013e4b, type: 3}
 --- !u!1 &1766928405
 GameObject:
   m_ObjectHideFlags: 0
