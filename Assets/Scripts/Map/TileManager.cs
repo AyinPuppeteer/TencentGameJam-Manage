@@ -102,4 +102,14 @@ public class TileManager : MonoBehaviour
         }
         return tiles;
     }
+
+    public List<Tile> ReturnEmptyTiles()
+    {
+        List<Tile> tiles = new();
+        foreach(var tile in tileList)
+        {
+            if(tile.Chess == null && tile.Elementor == null) tiles.Add(tile);
+        }
+        return tiles;
+    }
 }

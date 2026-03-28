@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Elementor : PickableItem
 {
-    private Element Element;
+    public Element Element { get; private set; }
 
     [SerializeField]
     private Sprite[] Icons;
@@ -15,7 +15,7 @@ public class Elementor : PickableItem
     public void Init(Element e)
     {
         Element = e;
-        Icon.sprite = Icons[(int)Element];
+        Icon.sprite = Icons[(int)Element - 1];
     }
 
     public override void WhenPick(Chess picker)

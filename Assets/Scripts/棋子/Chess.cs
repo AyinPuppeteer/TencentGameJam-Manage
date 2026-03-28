@@ -41,7 +41,15 @@ public class Chess : MonoBehaviour
 
     public void SetTile(Tile tile)
     {
+        if(InTile != null) InTile.Chess = null;
         InTile = tile;
+        InTile.Chess = this;
+        if(InTile.Elementor != null)
+        {
+            ObtainElementor(InTile.Elementor.Element);
+            InTile.Elementor = null;
+            Destroy(InTile.Elementor);
+        }
     }
 
     public void SetBelonging(int belonging)
@@ -100,6 +108,7 @@ public class Chess : MonoBehaviour
     public void OnDestroy()
     {
         if(InTile != null && InTile.Chess == this) InTile.Chess = null;//Ïû³ýÒýÓÃ
+        GameManager.Instance.ChessSet.Remove(this);
     }
 }
 
