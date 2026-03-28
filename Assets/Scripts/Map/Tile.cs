@@ -28,4 +28,17 @@ public class Tile : MonoBehaviour
     {
         return Math.Max(Math.Abs(Row - another.Row), Math.Abs(Column - another.Column));
     }
+
+    public void CreateSlime(int belonging, Element e)
+    {
+        if (Chess != null) return;
+        Chess = Instantiate(GameManager.Instance.ChessPrefabs[(int)e], transform.position, Quaternion.identity, transform).GetComponent<Chess>();
+        Chess.SetTile(this);
+        Chess.SetBelonging(belonging);
+    }
+
+    public void OnMouseDown()
+    {
+        GameManager.Instance.ClickTile(this);
+    }
 }

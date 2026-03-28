@@ -14,6 +14,8 @@ public class Chess : MonoBehaviour
     /// ËùÊôÕóÓª
     /// </summary>
     public int Belonging { get; protected set; }
+    [SerializeField]
+    private SpriteRenderer BelongingCircle;
 
     /// <summary>
     /// ÔªËØ
@@ -40,6 +42,12 @@ public class Chess : MonoBehaviour
     public void SetTile(Tile tile)
     {
         InTile = tile;
+    }
+
+    public void SetBelonging(int belonging)
+    {
+        Belonging = belonging;
+        BelongingCircle.color = belonging == 1 ? Color.red : Color.blue;
     }
 
     /// <summary>
