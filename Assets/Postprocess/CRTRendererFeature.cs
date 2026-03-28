@@ -10,7 +10,7 @@ public class CRTRendererFeature : ScriptableRendererFeature
         [Header("Material")]
         public Material crtMaterial;
 
-        [Header("Render Pass Event")]
+        [Header("Pass Event")]
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing;
 
         [Header("Low Resolution")]
@@ -18,7 +18,8 @@ public class CRTRendererFeature : ScriptableRendererFeature
         [Range(64, 1080)] public int lowResHeight = 180;
 
         [Header("Filter Mode")]
-        public FilterMode filterMode = FilterMode.Point;
+        public FilterMode lowResFilterMode = FilterMode.Point;
+        public FilterMode tempFilterMode = FilterMode.Bilinear;
     }
 
     public CRTSettings settings = new CRTSettings();
@@ -34,10 +35,7 @@ public class CRTRendererFeature : ScriptableRendererFeature
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
         if (settings.crtMaterial == null)
-        {
-            Debug.LogWarning("CRTRendererFeature: CRT Material is missing.");
             return;
-        }
 
         if (renderingData.cameraData.cameraType != CameraType.Game)
             return;

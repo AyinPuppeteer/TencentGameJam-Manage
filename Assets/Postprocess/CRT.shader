@@ -1,33 +1,34 @@
-Shader "Custom/CRT"
+Shader "Custom/CRT_HDR_Final"
 {
     Properties
     {
-        _MainTex ("Main Tex", 2D) = "white" {}
         _LowResTex ("Low Res Texture", 2D) = "white" {}
 
         [Header(Main)]
-        _Brightness ("Brightness", Range(0.5, 2.0)) = 1.0
+        _Brightness ("Brightness", Range(0.5, 8.0)) = 1.2
         _Contrast ("Contrast", Range(0.5, 2.0)) = 1.0
-        _VignetteStrength ("Vignette Strength", Range(0, 1)) = 0.25
-
-        [Header(Scanline)]
-        _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.2
-        _ScanlineDensity ("Scanline Density", Range(100, 2000)) = 800
-
-        [Header(RGB Split)]
-        _ChromaticAberration ("Chromatic Aberration", Range(0, 0.01)) = 0.0015
 
         [Header(Dot Mask)]
         _DotMaskScale ("Dot Mask Scale", Range(100, 2000)) = 700
-        _DotMaskStrength ("Dot Mask Strength", Range(0, 1)) = 0.35
-        _DotRadius ("Dot Radius", Range(0.05, 0.45)) = 0.22
+        _DotMaskStrength ("Dot Mask Strength", Range(0, 1)) = 0.2
+        _DotRadius ("Dot Radius", Range(0.05, 0.45)) = 0.20
         _DotSoftness ("Dot Softness", Range(0.001, 0.2)) = 0.08
 
-        [Header(Flicker)]
-        _FlickerStrength ("Flicker Strength", Range(0, 0.2)) = 0.03
-        _FlickerSpeed ("Flicker Speed", Range(0, 20)) = 8.0
+        [Header(Scanline)]
+        _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.10
+        _ScanlineDensity ("Scanline Density", Range(100, 2000)) = 900
 
-        [Header(Low Res Info From Script)]
+        [Header(Chromatic Aberration)]
+        _ChromaticAberration ("Chromatic Aberration", Range(0, 0.01)) = 0.001
+
+        [Header(Vignette)]
+        _VignetteStrength ("Vignette Strength", Range(0, 1)) = 0.12
+
+        [Header(Flicker)]
+        _FlickerStrength ("Flicker Strength", Range(0, 0.2)) = 0.01
+        _FlickerSpeed ("Flicker Speed", Range(0, 20)) = 7.0
+
+        [Header(Low Res Size)]
         _LowResWidth ("Low Res Width", Float) = 320
         _LowResHeight ("Low Res Height", Float) = 180
     }
@@ -43,7 +44,7 @@ Shader "Custom/CRT"
 
         Pass
         {
-            Name "CRT DotMask Pass"
+            Name "CRT HDR Final Pass"
             ZWrite Off
             ZTest Always
             Cull Off
@@ -55,26 +56,24 @@ Shader "Custom/CRT"
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
-
             TEXTURE2D(_LowResTex);
             SAMPLER(sampler_LowResTex);
 
             CBUFFER_START(UnityPerMaterial)
                 float _Brightness;
                 float _Contrast;
-                float _VignetteStrength;
+
+                float _DotMaskScale;
+                float _DotMaskStrength;
+                float _DotRadius;
+                float _DotSoftness;
 
                 float _ScanlineIntensity;
                 float _ScanlineDensity;
 
                 float _ChromaticAberration;
 
-                float _DotMaskScale;
-                float _DotMaskStrength;
-                float _DotRadius;
-                float _DotSoftness;
+                float _VignetteStrength;
 
                 float _FlickerStrength;
                 float _FlickerSpeed;
@@ -93,6 +92,7 @@ Shader "Custom/CRT"
                 float4 positionCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
             };
+
             Varyings Vert(Attributes input)
             {
                 Varyings output;
@@ -137,7 +137,8 @@ Shader "Custom/CRT"
 
                 float2 cell = frac(grid) - 0.5;
 
-                float3 mask = float3(0.18, 0.18, 0.18);
+               
+                float3 mask = float3(0.55, 0.55, 0.55);
 
                 float2 redCenter   = float2(-0.22, 0.0);
                 float2 greenCenter = float2( 0.00, 0.0);
@@ -179,12 +180,15 @@ Shader "Custom/CRT"
             {
                 float2 uv = input.uv;
 
-                float3 color = SampleLowResCRT(uv);
+                // 原始输入，可能已经包含 Bloom/HDR 结果
+                float3 src = SampleLowResCRT(uv);
+
+                float3 color = src;
 
                 float3 dotMask = BuildDotMask(uv);
-                float  scan    = BuildScanline(uv);
-                float  vig     = BuildVignette(uv);
-                float  flicker = BuildFlicker();
+                float scan = BuildScanline(uv);
+                float vig = BuildVignette(uv);
+                float flicker = BuildFlicker();
 
                 color *= lerp(float3(1.0, 1.0, 1.0), dotMask, _DotMaskStrength);
                 color *= scan;
@@ -194,6 +198,7 @@ Shader "Custom/CRT"
                 color = ApplyContrast(color, _Contrast);
                 color *= _Brightness;
 
+                // 不 clamp，不 saturate，保留 HDR 亮度
                 return float4(color, 1.0);
             }
             ENDHLSL

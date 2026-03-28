@@ -15,10 +15,11 @@ MonoBehaviour:
   m_Active: 1
   settings:
     crtMaterial: {fileID: 2100000, guid: 8d845d140a8e0ac46b50db133294c707, type: 2}
-    renderPassEvent: 600
+    renderPassEvent: 550
     lowResWidth: 320
     lowResHeight: 180
-    filterMode: 0
+    lowResFilterMode: 0
+    tempFilterMode: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
