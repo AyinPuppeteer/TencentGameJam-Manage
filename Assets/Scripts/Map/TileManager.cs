@@ -4,14 +4,11 @@ using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-using static Tile;
 
 public class TileManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject tilePrefab;
-    [SerializeField]
-    private Sprite[] spriteList;//贴图列表
 
     public int maxHeight { get; private set; }
     public int maxWidth { get; private set; }
@@ -44,27 +41,6 @@ public class TileManager : MonoBehaviour
     {
         main2DCamera = Camera.main;
         Instance = this;
-
-        //测试用地图生成
-        MapPack map = new();
-        map.Tiles = new int[13, 8]
-        {
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0}
-
-        };
-        GenerateMap(map);
     }
 
     private void Update()
@@ -72,33 +48,22 @@ public class TileManager : MonoBehaviour
         TileChoose();
     }
 
-    public void GenerateMap(MapPack pack)
+    public void GenerateMap()
     {
-        if (tileList != null)
-        {
-            Debug.LogError("重复加载地图！");
-        }
-        else if (pack == null || pack.Tiles == null)
-        {
-            Debug.LogWarning("地图规格未设置！");
-        }
-        else
-        {
-            maxHeight = pack.Tiles.GetLength(0);
-            maxWidth = pack.Tiles.GetLength(1);
+        maxHeight = 8;
+        maxWidth = 13;
 
-            tileList = new Tile[maxHeight, maxWidth];
+        tileList = new Tile[maxHeight, maxWidth];
 
-            for (int i = 0; i < maxHeight; i++)
+        for (int i = 0; i < maxHeight; i++)
+        {
+            for (int j = 0; j < maxWidth; j++)
             {
-                for (int j = 0; j < maxWidth; j++)
-                {
-                    GameObject ob = Instantiate(tilePrefab, transform.position + new Vector3((j - maxWidth / 2.0f) * 0.16f + 0.08f, (maxHeight / 2.0f - i) * 0.16f - 0.08f, 0), Quaternion.identity, transform);
-                    Tile tile = ob.GetComponent<Tile>();
-                    tile.Initialize((TileType)pack.Tiles[i, j], i, j, spriteList[pack.Tiles[i, j]]);
-                    tileList[i, j] = tile;
-                    //Debug.Log($"生成了一个{(TileType)pack.Tiles[i, j]}格子，坐标为({i + 1}, {j + 1})");
-                }
+                GameObject ob = Instantiate(tilePrefab, transform.position + new Vector3((j - maxWidth / 2.0f) * 0.16f + 0.08f, (maxHeight / 2.0f - i) * 0.16f - 0.08f, 0), Quaternion.identity, transform);
+                Tile tile = ob.GetComponent<Tile>();
+                tile.Initialize(i, j);
+                tileList[i, j] = tile;
+                //Debug.Log($"生成了一个{(TileType)pack.Tiles[i, j]}格子，坐标为({i + 1}, {j + 1})");
             }
         }
     }
@@ -136,11 +101,5 @@ public class TileManager : MonoBehaviour
             }
         }
         return tiles;
-    }
-
-    //地图配置包
-    public class MapPack
-    {
-        public int[,] Tiles;
     }
 }

@@ -21,7 +21,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void ClickPlot()
+    private void Start()
+    {
+        TileManager.Instance.GenerateMap();
+
+    }
+
+    public void ClickTile(Tile tile)
     {
 
     }
