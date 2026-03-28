@@ -290,7 +290,10 @@ GameObject:
   - component: {fileID: 862848558}
   - component: {fileID: 862848557}
   - component: {fileID: 862848556}
+<<<<<<< HEAD
   - component: {fileID: 862848560}
+=======
+>>>>>>> Develop
   - component: {fileID: 862848559}
   m_Layer: 0
   m_Name: Main Camera
@@ -382,6 +385,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 862848555}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -399,6 +403,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 862848555}
   m_Enabled: 1
   m_EditorHideFlags: 0
+=======
+>>>>>>> Develop
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
