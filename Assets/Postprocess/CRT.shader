@@ -93,13 +93,12 @@ Shader "Custom/CRT"
                 float4 positionCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
             };
-
             Varyings Vert(Attributes input)
             {
                 Varyings output;
 
                 float2 uv = float2((input.vertexID << 1) & 2, input.vertexID & 2);
-                output.uv = uv;
+                output.uv = float2(uv.x, 1.0 - uv.y);
                 output.positionCS = float4(uv * 2.0 - 1.0, 0.0, 1.0);
 
                 return output;
@@ -176,24 +175,26 @@ Shader "Custom/CRT"
                 return lerp(1.0 - _FlickerStrength, 1.0, flicker);
             }
 
-            half4 Frag(Varyings input) : SV_Target
+            float4 Frag(Varyings input) : SV_Target
             {
                 float2 uv = input.uv;
 
                 float3 color = SampleLowResCRT(uv);
 
                 float3 dotMask = BuildDotMask(uv);
-                color *= lerp(float3(1.0, 1.0, 1.0), dotMask, _DotMaskStrength);
+                float  scan    = BuildScanline(uv);
+                float  vig     = BuildVignette(uv);
+                float  flicker = BuildFlicker();
 
-                color *= BuildScanline(uv);
-                color *= BuildVignette(uv);
-                color *= BuildFlicker();
+                color *= lerp(float3(1.0, 1.0, 1.0), dotMask, _DotMaskStrength);
+                color *= scan;
+                color *= vig;
+                color *= flicker;
 
                 color = ApplyContrast(color, _Contrast);
                 color *= _Brightness;
-                color = saturate(color);
 
-                return half4(color, 1.0);
+                return float4(color, 1.0);
             }
             ENDHLSL
         }
