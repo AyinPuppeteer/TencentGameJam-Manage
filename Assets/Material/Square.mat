@@ -51,5 +51,5 @@ Material:
     - _Speed: 0.44
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 3.6409018, g: 1.5348042, b: 0.53812045, a: 1}
+    - _RimColor: {r: 4.237095, g: 1.7861265, b: 0.626237, a: 1}
   m_BuildTextureStacks: []
