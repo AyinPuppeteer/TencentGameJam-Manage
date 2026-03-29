@@ -38,7 +38,9 @@ public class PanelAnim : MonoBehaviour
         {
             StartCoroutine(ShowPanel());
             isShowed = true;
+            this.gameObject.SetActive(true);
         }
+        
     }
     public void Hide()
     {
@@ -46,6 +48,18 @@ public class PanelAnim : MonoBehaviour
         {
             StartCoroutine(HidePanel());
             isShowed = false;
+            this.gameObject.SetActive(false);
+        }
+        
+    }
+
+    public void Hide_Dia()
+    {
+        if (!isShowed)
+        {
+            StartCoroutine(HidePanel());
+            isShowed = false;
+            this.gameObject.SetActive(false);
         }
     }
     public void GameOver()
