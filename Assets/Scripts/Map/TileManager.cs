@@ -115,13 +115,6 @@ public class TileManager : MonoBehaviour
 
     public void DimAll()
     {
-        foreach (var tile in tileList) tile.OpenHighlight(false);
-    }
-    public void HighlightFour(int row, int column)
-    {
-        GetTile(row, column + 1)?.OpenHighlight(true);
-        GetTile(row, column - 1)?.OpenHighlight(true);
-        GetTile(row + 1, column)?.OpenHighlight(true);
-        GetTile(row - 1, column)?.OpenHighlight(true);
+        foreach (var tile in tileList) tile.OpenHighlight(false, false);
     }
 }

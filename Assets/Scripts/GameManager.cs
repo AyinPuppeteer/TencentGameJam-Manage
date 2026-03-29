@@ -26,14 +26,15 @@ public class GameManager : MonoBehaviour
     /// 当前抓取的棋子
     /// </summary>
     private Chess HoldChess;
+    private bool Spliting;//分裂状态
 
     [SerializeField]
-    private Material BaseMat, HighlightMat;//（棋子的）普通材质/高光材质
+    private Material BaseMat, HighlightMat, SplitMat;//（棋子的）普通材质/高光材质/繁殖高光材质
 
     /// <summary>
     /// 元素颗粒物体
     /// </summary>
-    public GameObject ElementorPrefab;
+    public GameObject[] ElementorPrefabs;
 
     public static GameManager Instance { get; private set; }
 
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void PhaseShift()
     {
+        Spliting = false;
         CatchChess(null);
 
         TurnPlayer = 3 - TurnPlayer;
@@ -106,10 +108,20 @@ public class GameManager : MonoBehaviour
         {
             if (HoldChess.Moveable)
             {
-                if(tile.ManDis(HoldChess.InTile) == 1 && (tile.Chess == null || tile.Chess.Belonging != HoldChess.Belonging))
+                if(tile.ManDis(HoldChess.InTile) == 1)
                 {
-                    HoldChess.MoveTo(tile);
-                    HoldChess.Moveable = false;
+                    if (Spliting)
+                    {
+                        HoldChess.Split(tile);
+                        HoldChess.Moveable = false;
+                    }
+                    else
+                    {
+                        HoldChess.MoveTo(tile);
+                        HoldChess.Moveable = false;
+                    }
+                    CatchChess(null);
+                    return;
                 }
             }
             CatchChess(null);
@@ -120,15 +132,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CatchChess(Chess chess)
+    public void LongPressTile(Tile tile)
     {
+        if (tile.Chess != null && tile.Chess.Belonging == TurnPlayer && tile.Chess.Level == 4)
+        {
+            CatchChess(tile.Chess, true);
+        }
+    }
+
+    public void CatchChess(Chess chess, bool split = false)
+    {
+        Spliting = split;
         TileManager.Instance.DimAll();
         if (HoldChess != null) HoldChess.SetMat(BaseMat);
         HoldChess = chess;
         if (chess != null && chess.Moveable)
         {
-            HoldChess.SetMat(HighlightMat);
-            TileManager.Instance.HighlightFour(HoldChess.InTile.Row_, HoldChess.InTile.Column_);
+            HoldChess.SetMat(Spliting ? SplitMat : HighlightMat);
+            TileManager.Instance.GetTile(chess.InTile.Row_, chess.InTile.Column_ + 1)?.OpenHighlight(true, Spliting);
+            TileManager.Instance.GetTile(chess.InTile.Row_, chess.InTile.Column_ - 1)?.OpenHighlight(true, Spliting);
+            TileManager.Instance.GetTile(chess.InTile.Row_ + 1, chess.InTile.Column_)?.OpenHighlight(true, Spliting);
+            TileManager.Instance.GetTile(chess.InTile.Row_ - 1, chess.InTile.Column_)?.OpenHighlight(true, Spliting);
         }
     }
 }

@@ -11,8 +11,7 @@ public class Chess : MonoBehaviour
     [SerializeField]
     private SpriteRenderer Icon;
 
-    [SerializeField]
-    private Animator Anim;
+    public Animator Anim;
 
     [SerializeField]
     private SpriteRenderer[] LevelBar;
@@ -29,10 +28,14 @@ public class Chess : MonoBehaviour
     /// </summary>
     protected Element Element = Element.Œﬁ;
 
-    protected int Level = 1;
+    public int Level { get; protected set; } = 1;
     public void LevelUp()
     {
-        LevelBar[Level++].enabled = true;
+        Level++;
+        LevelBar[0].enabled = Level > 0;
+        LevelBar[1].enabled = Level > 1;
+        LevelBar[2].enabled = Level > 2;
+        LevelBar[3].enabled = Level > 3;
         if (Level >= 5) Kill();
     }
 
@@ -87,6 +90,8 @@ public class Chess : MonoBehaviour
                 else
                 {
                     Kill();
+                    tile.Chess.Anim.SetTrigger("ÕÃ …");
+                    tile.Chess.LevelUp();
                 }
             }
             else
@@ -127,6 +132,14 @@ public class Chess : MonoBehaviour
     public void SetMat(Material mat)
     {
         Icon.material = new Material(mat);
+    }
+
+    public void Split(Tile tile)
+    {
+        Level = 2;
+        LevelBar[2].enabled = false;
+        LevelBar[3].enabled = false;
+        tile.CreateSlime(Belonging, Element.Œﬁ);
     }
 
     /// <summary>
