@@ -46,8 +46,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _BlinkingSpeed: 0.427536
     - _Float2: 0
+    - _Speed: 0.44
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 111.899345, g: 0, b: 102.19912, a: 1}
+    - _RimColor: {r: 3.6409018, g: 1.5348042, b: 0.53812045, a: 1}
   m_BuildTextureStacks: []
