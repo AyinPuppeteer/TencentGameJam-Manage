@@ -93,26 +93,30 @@ public class GameManager : MonoBehaviour
         {
             if(tile.Chess != null && tile.Chess.Belonging == TurnPlayer)
             {
-                HoldChess = tile.Chess;
-                Debug.Log("(>_<)");
+                CatchChess(tile.Chess);
             }
         }
         else
         {
             if (HoldChess.Moveable)
             {
-                if(tile.ManDis(HoldChess.InTile) == 1)
+                if(tile.ManDis(HoldChess.InTile) == 1 && (tile.Chess == null || tile.Chess.Belonging != HoldChess.Belonging))
                 {
                     HoldChess.MoveTo(tile);
+                    HoldChess.Moveable = false;
                 }
-                HoldChess = null;
-                Debug.Log("(O O)");
             }
+            CatchChess(null);
         }
     }
 
     public void CatchChess(Chess chess)
     {
+        TileManager.Instance.DimAll();
         HoldChess = chess;
+        if(chess != null && chess.Moveable)
+        {
+            TileManager.Instance.HighlightFour(HoldChess.InTile.Row_, HoldChess.InTile.Column_);
+        }
     }
 }

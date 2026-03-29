@@ -14,6 +14,9 @@ public class Tile : MonoBehaviour
     [HideInInspector]
     public Elementor Elementor;//格子里的元素颗粒
 
+    [SerializeField]
+    private SpriteRenderer Highlight;//高光特效
+
     public void Initialize(int row, int column)
     {
         Row = row + 1;
@@ -49,5 +52,10 @@ public class Tile : MonoBehaviour
     public void OnMouseDown()
     {
         GameManager.Instance.ClickTile(this);
+    }
+
+    public void OpenHighlight(bool b)
+    {
+        Highlight.enabled = b;
     }
 }
