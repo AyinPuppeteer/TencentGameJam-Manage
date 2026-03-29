@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     crtMaterial: {fileID: 2100000, guid: 8d845d140a8e0ac46b50db133294c707, type: 2}
-    renderPassEvent: 550
+    renderPassEvent: 600
     lowResWidth: 320
     lowResHeight: 180
     lowResFilterMode: 0
