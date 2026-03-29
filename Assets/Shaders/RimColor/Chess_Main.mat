@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Chess_Main
-  m_Shader: {fileID: 4800000, guid: 1aa16be5403bc8546b53ba91a43df65e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9b3d146c1e025974e9a540f565f4c700, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
