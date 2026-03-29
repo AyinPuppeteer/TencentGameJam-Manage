@@ -216,12 +216,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a338530f161e0c44f8251b470dfe580f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Anim: {fileID: 1776319208396562575}
   LevelBar:
   - {fileID: 1063154389599036671}
   - {fileID: 5822147627498911053}
   - {fileID: 3722205054800762043}
   - {fileID: 9045856752417618357}
   BelongingCircle: {fileID: 587314870283994904}
+  Moveable: 0
 --- !u!95 &1776319208396562575
 Animator:
   serializedVersion: 5

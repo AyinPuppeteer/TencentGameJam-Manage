@@ -9,6 +9,9 @@ using UnityEngine;
 public class Chess : MonoBehaviour
 {
     [SerializeField]
+    private Animator Anim;
+
+    [SerializeField]
     private SpriteRenderer[] LevelBar;
 
     /// <summary>
@@ -66,13 +69,16 @@ public class Chess : MonoBehaviour
 
     public void MoveTo(Tile tile)
     {
+        Anim.SetBool("移动", true);
         transform.DOMove(tile.transform.position, 0.3f).OnComplete(() =>
         {
-            if(tile.Chess != null)
+            Anim.SetBool("移动", false);
+            if (tile.Chess != null)
             {
                 if(Combat(this, tile.Chess))
                 {
                     tile.Chess.Kill();
+                    Anim.SetTrigger("吞噬");
                     LevelUp();
                     SetTile(tile);
                 }
@@ -80,6 +86,10 @@ public class Chess : MonoBehaviour
                 {
                     Kill();
                 }
+            }
+            else
+            {
+                SetTile(tile);
             }
         });
     }
@@ -94,18 +104,22 @@ public class Chess : MonoBehaviour
 
     public void ObtainElementor(Element e)
     {
-        if(Element == Element.无)
+        Anim.SetTrigger("吞噬");
+        DOTween.To(() => 0, x => { }, 0, 0.5f).OnComplete(() =>
         {
-            Element = e;
-        }
-        else if(Element == e)
-        {
-            LevelUp();
-        }
-        else
-        {
-            Kill();
-        }
+            if (Element == e)
+            {
+                LevelUp();
+            }
+            else
+            {
+                Kill();
+                if (Element == Element.无)
+                {
+                    InTile.CreateSlime(Belonging, e);
+                }
+            }
+        });
     }
 
     /// <summary>
@@ -113,13 +127,9 @@ public class Chess : MonoBehaviour
     /// </summary>
     public void Kill()
     {
-        Destroy(gameObject);
-    }
-
-    public void OnDestroy()
-    {
-        if(InTile != null && InTile.Chess == this) InTile.Chess = null;//消除引用
+        if (InTile != null && InTile.Chess == this) InTile.Chess = null;//消除引用
         GameManager.Instance.ChessSet.Remove(this);
+        Destroy(gameObject);
     }
 }
 
