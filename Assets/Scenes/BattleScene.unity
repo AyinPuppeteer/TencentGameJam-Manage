@@ -2136,6 +2136,7 @@ MonoBehaviour:
   - {fileID: 2398822972630363002, guid: b18001ba9cafb224eb5357503745313f, type: 3}
   BaseMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   HighlightMat: {fileID: 2100000, guid: c4e8745d0c4abd6419d490d16b2cee6f, type: 2}
+  SplitMat: {fileID: 2100000, guid: 5e327126f8dc5cb4a9a6d1e94f17e52b, type: 2}
   ElementorPrefab: {fileID: 9007098213994736157, guid: b1d9082f66351ba498a15239f2013e4b, type: 3}
 --- !u!1 &1535836621
 GameObject:
