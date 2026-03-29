@@ -11,6 +11,7 @@ public class Tile : MonoBehaviour
 
     [HideInInspector]
     public Chess Chess;//格子里的棋子
+    [HideInInspector]
     public Elementor Elementor;//格子里的元素颗粒
 
     public void Initialize(int row, int column)
