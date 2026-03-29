@@ -11,6 +11,7 @@ public class Tile : MonoBehaviour
 
     [HideInInspector]
     public Chess Chess;//格子里的棋子
+    [HideInInspector]
     public Elementor Elementor;//格子里的元素颗粒
 
     public void Initialize(int row, int column)
@@ -36,6 +37,7 @@ public class Tile : MonoBehaviour
         Chess = Instantiate(GameManager.Instance.ChessPrefabs[(int)e], transform.position, Quaternion.identity, transform).GetComponent<Chess>();
         Chess.SetTile(this);
         Chess.SetBelonging(belonging);
+        GameManager.Instance.ChessSet.Add(Chess);
     }
 
     public void CreateElementor(Element e)
@@ -47,6 +49,5 @@ public class Tile : MonoBehaviour
     public void OnMouseDown()
     {
         GameManager.Instance.ClickTile(this);
-        GameManager.Instance.ChessSet.Add(Chess);
     }
 }

@@ -58,10 +58,11 @@ public class GameManager : MonoBehaviour
         TurnPlayer = 3 - TurnPlayer;
         foreach(var chess in ChessSet)
         {
-            if(chess.Belonging == TurnPlayer)
+            if (chess.Belonging == TurnPlayer)
             {
-                //回复行动点
+                chess.Moveable = true;//回复行动点
             }
+            else chess.Moveable = false;
         }
 
         foreach(var elementor in TileManager.Instance.GetComponentsInChildren<Elementor>())
@@ -93,6 +94,19 @@ public class GameManager : MonoBehaviour
             if(tile.Chess != null && tile.Chess.Belonging == TurnPlayer)
             {
                 HoldChess = tile.Chess;
+                Debug.Log("(>_<)");
+            }
+        }
+        else
+        {
+            if (HoldChess.Moveable)
+            {
+                if(tile.ManDis(HoldChess.InTile) == 1)
+                {
+                    HoldChess.MoveTo(tile);
+                }
+                HoldChess = null;
+                Debug.Log("(O O)");
             }
         }
     }

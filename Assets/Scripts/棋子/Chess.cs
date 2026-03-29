@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,11 @@ public class Chess : MonoBehaviour
         if (Level >= 5) Kill();
     }
 
+    /// <summary>
+    /// 能否行动
+    /// </summary>
+    public bool Moveable;
+
     private void Start()
     {
         LevelBar[0].enabled = true;
@@ -37,7 +43,7 @@ public class Chess : MonoBehaviour
         LevelBar[3].enabled = false;
     }
 
-    private Tile InTile;
+    public Tile InTile { get; protected set; } 
 
     public void SetTile(Tile tile)
     {
@@ -58,27 +64,32 @@ public class Chess : MonoBehaviour
         BelongingCircle.color = belonging == 1 ? Color.red : Color.blue;
     }
 
+    public void MoveTo(Tile tile)
+    {
+        transform.DOMove(tile.transform.position, 0.3f).OnComplete(() =>
+        {
+            if(tile.Chess != null)
+            {
+                if(Combat(this, tile.Chess))
+                {
+                    tile.Chess.Kill();
+                    LevelUp();
+                    SetTile(tile);
+                }
+                else
+                {
+                    Kill();
+                }
+            }
+        });
+    }
+
     /// <summary>
     /// 判断战斗结果（前者为进攻方）
     /// </summary>
     public static bool Combat(Chess a, Chess b)
     {
-        switch (a.Element.Jugde(b.Element))
-        {
-            case 0:
-                {
-                    return a.Level >= b.Level;
-                }
-            case 1:
-                {
-                    return a.Level != 4 || b.Level != 1;
-                }
-            case -1:
-                {
-                    return a.Level == 4 && b.Level == 1;
-                }
-        }
-        return true;
+        return a.Level + a.Element.Jugde(b.Element) > b.Level;
     }
 
     public void ObtainElementor(Element e)
