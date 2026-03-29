@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Square
+  m_Name: "\u683C\u5B50\u9AD8\u5149"
   m_Shader: {fileID: 4800000, guid: 29855d3a72ff77b4bb36f15d3c35fcaa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -47,10 +47,9 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BlinkingSpeed: 0.427536
-    - _BlinkingSpeed: 0.5
     - _Float2: 0
     - _Speed: 0.44
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 7.3772106, g: 3.1098268, b: 1.0903418, a: 1}
+    - _RimColor: {r: 7.3772106, g: 3.6449072, b: 1.1201, a: 1}
   m_BuildTextureStacks: []
