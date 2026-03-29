@@ -65,8 +65,7 @@ public class Tile : MonoBehaviour
 
     public void CreateElementor(Element e)
     {
-        Elementor = Instantiate(GameManager.Instance.ElementorPrefab, transform.position, Quaternion.identity, transform).GetComponent<Elementor>();
-        Elementor.Init(e);
+        Elementor = Instantiate(GameManager.Instance.ElementorPrefabs[(int)e - 1], transform.position, Quaternion.identity, transform).GetComponent<Elementor>();
     }
 
     private float PressTimer;//°´Ñ¹¼ÆÊ±Æ÷

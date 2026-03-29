@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// ÔªËØ¿ÅÁ£ÎïÌå
     /// </summary>
-    public GameObject ElementorPrefab;
+    public GameObject[] ElementorPrefabs;
 
     public static GameManager Instance { get; private set; }
 
