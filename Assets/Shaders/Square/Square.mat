@@ -47,6 +47,7 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BlinkingSpeed: 0.427536
+    - _BlinkingSpeed: 0.5
     - _Float2: 0
     - _Speed: 0.44
     m_Colors:
