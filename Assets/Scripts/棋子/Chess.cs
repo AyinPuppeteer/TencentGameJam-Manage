@@ -58,9 +58,8 @@ public class Chess : MonoBehaviour
         InTile.Chess = this;
         if(InTile.Elementor != null)
         {
-            ObtainElementor(InTile.Elementor.Element);
+            InTile.Elementor.WhenPick(this);
             InTile.Elementor = null;
-            Destroy(InTile.Elementor);
         }
     }
 
@@ -102,7 +101,7 @@ public class Chess : MonoBehaviour
     /// </summary>
     public static bool Combat(Chess a, Chess b)
     {
-        return a.Level + a.Element.Jugde(b.Element) > b.Level;
+        return a.Level + a.Element.Jugde(b.Element) >= b.Level;
     }
 
     public void ObtainElementor(Element e)
