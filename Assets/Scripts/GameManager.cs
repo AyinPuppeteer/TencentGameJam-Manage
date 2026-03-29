@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private Chess HoldChess;
 
+    [SerializeField]
+    private Material BaseMat, HighlightMat;//（棋子的）普通材质/高光材质
+
     /// <summary>
     /// 元素颗粒物体
     /// </summary>
@@ -53,8 +56,18 @@ public class GameManager : MonoBehaviour
         PhaseShift();
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            CatchChess(null);
+        }
+    }
+
     public void PhaseShift()
     {
+        CatchChess(null);
+
         TurnPlayer = 3 - TurnPlayer;
         foreach(var chess in ChessSet)
         {
@@ -89,14 +102,7 @@ public class GameManager : MonoBehaviour
 
     public void ClickTile(Tile tile)
     {
-        if(HoldChess == null)
-        {
-            if(tile.Chess != null && tile.Chess.Belonging == TurnPlayer)
-            {
-                CatchChess(tile.Chess);
-            }
-        }
-        else
+        if (HoldChess != null)
         {
             if (HoldChess.Moveable)
             {
@@ -108,14 +114,20 @@ public class GameManager : MonoBehaviour
             }
             CatchChess(null);
         }
+        if (tile.Chess != null && tile.Chess.Belonging == TurnPlayer)
+        {
+            CatchChess(tile.Chess);
+        }
     }
 
     public void CatchChess(Chess chess)
     {
         TileManager.Instance.DimAll();
+        if (HoldChess != null) HoldChess.SetMat(BaseMat);
         HoldChess = chess;
-        if(chess != null && chess.Moveable)
+        if (chess != null && chess.Moveable)
         {
+            HoldChess.SetMat(HighlightMat);
             TileManager.Instance.HighlightFour(HoldChess.InTile.Row_, HoldChess.InTile.Column_);
         }
     }

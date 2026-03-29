@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a338530f161e0c44f8251b470dfe580f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Icon: {fileID: 779498833950575891}
   Anim: {fileID: 1776319208396562575}
   LevelBar:
   - {fileID: 1063154389599036671}

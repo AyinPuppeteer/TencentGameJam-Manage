@@ -9,6 +9,9 @@ using UnityEngine;
 public class Chess : MonoBehaviour
 {
     [SerializeField]
+    private SpriteRenderer Icon;
+
+    [SerializeField]
     private Animator Anim;
 
     [SerializeField]
@@ -120,6 +123,11 @@ public class Chess : MonoBehaviour
                 }
             }
         });
+    }
+
+    public void SetMat(Material mat)
+    {
+        Icon.material = new Material(mat);
     }
 
     /// <summary>

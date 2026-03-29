@@ -154,6 +154,7 @@ RectTransform:
   m_Children:
   - {fileID: 447619602}
   - {fileID: 288972306}
+  - {fileID: 155800925}
   - {fileID: 1704480165}
   - {fileID: 1025002029}
   - {fileID: 632911579}
@@ -502,16 +503,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155800924}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.001, y: 0.001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1704480165}
+  m_Father: {fileID: 16996212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.063, y: -0.145}
+  m_AnchoredPosition: {x: 1.2749999, y: -0.015000001}
   m_SizeDelta: {x: 111.5, y: 111.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155800926
@@ -557,7 +558,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 155800927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1414628517}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PhaseShift
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &155800927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,8 +764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 3.2, y: 1.8}
+  m_AnchoredPosition: {x: 0, y: 0.0053}
+  m_SizeDelta: {x: 3.2, y: 1.81059}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &447619603
 MonoBehaviour:
@@ -862,7 +875,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u70B9\u6211\u9000\u51FA\u6E38\u620F"
+  m_Text: "\u70B9\u6211\u8FD4\u56DE\u4E3B\u83DC\u5355"
 --- !u!222 &580592227
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1808,6 +1821,8 @@ MonoBehaviour:
   - {fileID: 2398822972630363002, guid: 1e4ddfe466860004aae091bdffb8a5b5, type: 3}
   - {fileID: 2398822972630363002, guid: e74e90f5360a18e4b9be79945c254551, type: 3}
   - {fileID: 2398822972630363002, guid: b18001ba9cafb224eb5357503745313f, type: 3}
+  BaseMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  HighlightMat: {fileID: 2100000, guid: c4e8745d0c4abd6419d490d16b2cee6f, type: 2}
   ElementorPrefab: {fileID: 9007098213994736157, guid: b1d9082f66351ba498a15239f2013e4b, type: 3}
 --- !u!1 &1535836621
 GameObject:
@@ -1860,7 +1875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1920,7 +1935,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1535836622}
-  - {fileID: 155800925}
   - {fileID: 748700330}
   m_Father: {fileID: 16996212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
