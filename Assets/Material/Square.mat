@@ -46,7 +46,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _BlinkingSpeed: 0.3
+    - _BlinkingSpeed: 0.5
     - _Float2: 0
     - _Speed: 0.44
     m_Colors:
