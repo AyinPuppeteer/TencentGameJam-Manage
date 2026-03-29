@@ -78,14 +78,14 @@ public class GameManager : MonoBehaviour
             else chess.Moveable = false;
         }
 
-        foreach(var elementor in TileManager.Instance.GetComponentsInChildren<Elementor>())
-        {
-            Destroy(elementor);
-        }
-        List<Tile> tiles = TileManager.Instance.ReturnEmptyTiles();
         if (TurnNum % 10 == 0)
         {
-            if(tiles.Count < 20)
+            foreach (var elementor in TileManager.Instance.GetComponentsInChildren<Elementor>())
+            {
+                Destroy(elementor.gameObject);
+            }
+            List<Tile> tiles = TileManager.Instance.ReturnEmptyTiles();
+            if (tiles.Count < 20)
             {
                 //无法生成新资源直接判定胜利
             }
