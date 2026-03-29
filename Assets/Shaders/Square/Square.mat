@@ -46,11 +46,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-<<<<<<< HEAD:Assets/Shaders/Square/Square.mat
     - _BlinkingSpeed: 0.427536
-=======
     - _BlinkingSpeed: 0.5
->>>>>>> Ayin:Assets/Material/Square.mat
     - _Float2: 0
     - _Speed: 0.44
     m_Colors:
