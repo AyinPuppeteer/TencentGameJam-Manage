@@ -36,6 +36,7 @@ public class Tile : MonoBehaviour
         Chess = Instantiate(GameManager.Instance.ChessPrefabs[(int)e], transform.position, Quaternion.identity, transform).GetComponent<Chess>();
         Chess.SetTile(this);
         Chess.SetBelonging(belonging);
+        GameManager.Instance.ChessSet.Add(Chess);
     }
 
     public void CreateElementor(Element e)
@@ -47,6 +48,5 @@ public class Tile : MonoBehaviour
     public void OnMouseDown()
     {
         GameManager.Instance.ClickTile(this);
-        GameManager.Instance.ChessSet.Add(Chess);
     }
 }
