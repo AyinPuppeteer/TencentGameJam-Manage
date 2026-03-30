@@ -112,8 +112,7 @@ public class GameManager : MonoBehaviour
 
         if (TurnNum % 10 == 0)
         {
-            ResetElementor();
-            //Anim.Play("过场");
+            Anim.SetTrigger("过场");
         }
 
         TurnNum++;
