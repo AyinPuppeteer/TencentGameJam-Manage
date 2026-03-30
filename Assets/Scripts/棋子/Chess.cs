@@ -55,6 +55,7 @@ public class Chess : MonoBehaviour
 
     private void Start()
     {
+        MoveableBar.SetActive(false);
         LevelBar[0].enabled = true;
         LevelBar[1].enabled = false;
         LevelBar[2].enabled = false;

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     /// 回合玩家
     /// </summary>
     public int TurnPlayer { get; private set; } = 2;//初始为2，因为上来就要反转
+    public SpriteRenderer BoardImage;
 
     /// <summary>
     /// 所有种类的棋子
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         CatchChess(null);
 
         TurnPlayer = 3 - TurnPlayer;
+        BoardImage.material.SetColor("_RimColor", TurnPlayer == 1 ? new(3, 0, 0) : new(0, 0, 3));
         foreach(var chess in ChessSet)
         {
             if (chess.Belonging == TurnPlayer)
