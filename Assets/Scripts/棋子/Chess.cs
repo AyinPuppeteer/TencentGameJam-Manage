@@ -155,6 +155,7 @@ public class Chess : MonoBehaviour
         LevelBar[2].enabled = false;
         LevelBar[3].enabled = false;
         tile.CreateSlime(Belonging, Element.нч);
+        Anim.SetTrigger("╥жая");
     }
 
     /// <summary>
