@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public GameObject[] ElementorPrefabs;
 
+    [SerializeField]
+    private Animator Anim;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -109,36 +112,45 @@ public class GameManager : MonoBehaviour
 
         if (TurnNum % 10 == 0)
         {
-            foreach (var elementor in TileManager.Instance.GetComponentsInChildren<Elementor>())
-            {
-                Destroy(elementor.gameObject);
-            }
-            List<Tile> tiles = TileManager.Instance.ReturnEmptyTiles();
-            if (tiles.Count < 20)
-            {
-                //无法生成新资源直接判定胜利
-                int p1 = 0, p2 = 0;
-                foreach (var chess in ChessSet)
-                {
-                    if (chess.Belonging == 1) p1++;
-                    else if (chess.Belonging == 2) p2++;
-                }
-                if(p1 == p2)
-                {
-                    GameOver(0);
-                }
-                else GameOver(p1 > p2 ? 1 : 2);
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                int t = UnityEngine.Random.Range(0, tiles.Count);
-                tiles[t].CreateElementor((Element)(i % 4 + 1));
-                tiles.RemoveAt(t);
-            }
+            ReSetElementor();
+            //Anim.Play("过场");
         }
 
         TurnNum++;
         TurnText.text = "Turn " + TurnNum;
+    }
+
+    /// <summary>
+    /// 重新生成元素颗粒
+    /// </summary>
+    public void ReSetElementor()
+    {
+        foreach (var elementor in TileManager.Instance.GetComponentsInChildren<Elementor>())
+        {
+            Destroy(elementor.gameObject);
+        }
+        List<Tile> tiles = TileManager.Instance.ReturnEmptyTiles();
+        if (tiles.Count < 20)
+        {
+            //无法生成新资源直接判定胜利
+            int p1 = 0, p2 = 0;
+            foreach (var chess in ChessSet)
+            {
+                if (chess.Belonging == 1) p1++;
+                else if (chess.Belonging == 2) p2++;
+            }
+            if (p1 == p2)
+            {
+                GameOver(0);
+            }
+            else GameOver(p1 > p2 ? 1 : 2);
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            int t = UnityEngine.Random.Range(0, tiles.Count);
+            tiles[t].CreateElementor((Element)(i % 4 + 1));
+            tiles.RemoveAt(t);
+        }
     }
 
     public void ClickTile(Tile tile)
