@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
         if (TurnNum % 10 == 0)
         {
-            ReSetElementor();
+            ResetElementor();
             //Anim.Play("过场");
         }
 
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 重新生成元素颗粒
     /// </summary>
-    public void ReSetElementor()
+    public void ResetElementor()
     {
         foreach (var elementor in TileManager.Instance.GetComponentsInChildren<Elementor>())
         {
