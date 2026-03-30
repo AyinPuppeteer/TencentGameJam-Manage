@@ -302,7 +302,7 @@ MonoBehaviour:
   - {fileID: 9045856752417618357}
   BelongingCircle: {fileID: 1354708254579156287}
   SplitTag: {fileID: 4514222906000772587}
-  MoveableBar: {fileID: 938321773343954017}
+  MoveableBar: {fileID: 288692369534771697}
 --- !u!95 &7140669293153198490
 Animator:
   serializedVersion: 5

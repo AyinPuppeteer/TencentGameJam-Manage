@@ -8,7 +8,13 @@ public class PanelAnim : MonoBehaviour
     public AnimationCurve hideCurve;
     public float animationSpeed;
 
-    private bool isShowed =false;
+    private bool isShowed = false;
+
+    private void Awake()
+    {
+        this.transform.localScale = Vector3.one * showCurve.Evaluate(0);
+    }
+
     IEnumerator ShowPanel()
     {
         float timer = 0;
@@ -62,21 +68,4 @@ public class PanelAnim : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-    public void GameOver()
-    {
-        Application.Quit();
-    }
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        Debug.Log("œ‘ æ");
-    //        Show();
-            
-    //    }
-    //    if (Input.GetMouseButtonDown(1))
-    //    {
-    //        Hide();
-    //    }
-    //}
 }

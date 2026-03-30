@@ -75,11 +75,14 @@ public class Tile : MonoBehaviour
 
     public void OnMouseDrag()
     {
-        if (PressTimer < 1f && (PressTimer += Time.deltaTime) >= 1f)
+        if (Chess != null && Chess.Belonging == GameManager.Instance.TurnPlayer && Chess.Moveable && Chess.Level >= 4)
         {
-            GameManager.Instance.LongPressTile(this);//触发长按
+            if (PressTimer < 1f && (PressTimer += Time.deltaTime) >= 1f)
+            {
+                GameManager.Instance.LongPressTile(this);//触发长按
+            }
+            PressCircle.fillAmount = PressTimer <= 1f ? PressTimer : 0;
         }
-        PressCircle.fillAmount = PressTimer <= 1f ? PressTimer : 0;
     }
 
     public void OnMouseUp()

@@ -42,7 +42,7 @@ public class Chess : MonoBehaviour
 
     public Image SplitTag;//可分裂记号
 
-    public Image MoveableBar;//体力条
+    public GameObject MoveableBar;//体力条
     /// <summary>
     /// 能否行动
     /// </summary>
@@ -50,7 +50,7 @@ public class Chess : MonoBehaviour
     public void SetMovable(bool b)
     {
         Moveable = b;
-        MoveableBar.enabled = b;
+        MoveableBar.SetActive(b);
     }
 
     private void Start()

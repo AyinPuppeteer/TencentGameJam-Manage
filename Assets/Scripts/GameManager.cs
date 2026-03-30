@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 回合玩家
     /// </summary>
-    private int TurnPlayer = 2;//初始为2，因为上来就要反转
+    public int TurnPlayer { get; private set; } = 2;//初始为2，因为上来就要反转
 
     /// <summary>
     /// 所有种类的棋子

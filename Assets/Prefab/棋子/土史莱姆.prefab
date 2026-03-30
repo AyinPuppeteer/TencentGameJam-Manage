@@ -444,7 +444,7 @@ MonoBehaviour:
   - {fileID: 9045856752417618357}
   BelongingCircle: {fileID: 587314870283994904}
   SplitTag: {fileID: 6596245205645893966}
-  MoveableBar: {fileID: 7500413924317330801}
+  MoveableBar: {fileID: 2162078633474004715}
 --- !u!223 &6643454057793022724
 Canvas:
   m_ObjectHideFlags: 0

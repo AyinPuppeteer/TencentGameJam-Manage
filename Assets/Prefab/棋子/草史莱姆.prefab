@@ -151,7 +151,7 @@ MonoBehaviour:
   - {fileID: 9045856752417618357}
   BelongingCircle: {fileID: 3167474880260552340}
   SplitTag: {fileID: 652893150129395464}
-  MoveableBar: {fileID: 3293320308420243153}
+  MoveableBar: {fileID: 6868414014429800968}
 --- !u!95 &3594515395635632649
 Animator:
   serializedVersion: 5
