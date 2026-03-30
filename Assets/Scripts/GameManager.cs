@@ -63,6 +63,15 @@ public class GameManager : MonoBehaviour
         {
             CatchChess(null);
         }
+
+        bool p1 = false, p2 = false;
+        foreach(var chess in ChessSet)
+        {
+            if (chess.Belonging == 1) p1 = true;
+            else if (chess.Belonging == 2) p2 = true;
+        }
+        if (!p1) GameOver(2);
+        else if (!p2) GameOver(1);
     }
 
     public void PhaseShift()
@@ -75,9 +84,9 @@ public class GameManager : MonoBehaviour
         {
             if (chess.Belonging == TurnPlayer)
             {
-                chess.Moveable = true;//回复行动点
+                chess.SetMovable(true);//回复行动点
             }
-            else chess.Moveable = false;
+            else chess.SetMovable(false);
         }
 
         if (TurnNum % 10 == 0)
@@ -90,6 +99,13 @@ public class GameManager : MonoBehaviour
             if (tiles.Count < 20)
             {
                 //无法生成新资源直接判定胜利
+                int p1 = 0, p2 = 0;
+                foreach (var chess in ChessSet)
+                {
+                    if (chess.Belonging == 1) p1++;
+                    else if (chess.Belonging == 2) p2++;
+                }
+                GameOver(p1 > p2 ? 1 : 2);
             }
             for (int i = 0; i < 20; i++)
             {
@@ -113,12 +129,12 @@ public class GameManager : MonoBehaviour
                     if (Spliting)
                     {
                         HoldChess.Split(tile);
-                        HoldChess.Moveable = false;
+                        HoldChess.SetMovable(false);
                     }
                     else
                     {
                         HoldChess.MoveTo(tile);
-                        HoldChess.Moveable = false;
+                        HoldChess.SetMovable(false);
                     }
                     CatchChess(null);
                     return;
@@ -154,5 +170,10 @@ public class GameManager : MonoBehaviour
             TileManager.Instance.GetTile(chess.InTile.Row_ + 1, chess.InTile.Column_)?.OpenHighlight(true, Spliting);
             TileManager.Instance.GetTile(chess.InTile.Row_ - 1, chess.InTile.Column_)?.OpenHighlight(true, Spliting);
         }
+    }
+
+    public void GameOver(int winner)
+    {
+
     }
 }
