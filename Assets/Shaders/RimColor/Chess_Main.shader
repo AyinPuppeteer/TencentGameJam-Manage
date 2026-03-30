@@ -1,6 +1,6 @@
 // Made with Amplify Shader Editor v1.9.9.4
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "Chess"
+Shader ""
 {
 	Properties
 	{
@@ -8,6 +8,7 @@ Shader "Chess"
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		_MainTex( "MainTex", 2D ) = "white" {}
 		[HDR] _RimColor( "RimColor", Color ) = ( 0, 0, 0, 0 )
+		_EdgeSickness( "EdgeSickness", Range( 0, 0.03 ) ) = 0.01194789
 
 		[HideInInspector][NoScaleOffset] unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
         [HideInInspector][NoScaleOffset] unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
@@ -98,6 +99,7 @@ Shader "Chess"
 			sampler2D _MainTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _RimColor;
+			float _EdgeSickness;
 			CBUFFER_END
 
 
@@ -170,26 +172,26 @@ Shader "Chess"
 
 				float2 _Vector0 = float2(1,1);
 				float2 texCoord118 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_119_0 = ( texCoord118.x + 0.01194789 );
+				float temp_output_119_0 = ( texCoord118.x + _EdgeSickness );
 				float2 appendResult121 = (float2(temp_output_119_0 , texCoord118.y));
 				float2 lerpResult211 = lerp( _Vector0 , appendResult121 , step( temp_output_119_0 , 1.0 ));
 				float2 uv1149 = lerpResult211;
 				float4 tex2DNode123 = tex2D( _MainTex, uv1149 );
 				float2 texCoord128 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_153_0 = ( texCoord128.x - 0.01194789 );
+				float temp_output_153_0 = ( texCoord128.x - _EdgeSickness );
 				float2 appendResult130 = (float2(temp_output_153_0 , texCoord128.y));
 				float2 lerpResult216 = lerp( _Vector0 , appendResult130 , step( 0.0 , temp_output_153_0 ));
 				float2 uv2150 = lerpResult216;
 				float4 tex2DNode146 = tex2D( _MainTex, uv2150 );
 				float2 _Vector1 = float2(1,1);
 				float2 texCoord140 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_139_0 = ( texCoord140.y + 0.01194789 );
+				float temp_output_139_0 = ( texCoord140.y + _EdgeSickness );
 				float2 appendResult138 = (float2(texCoord140.x , temp_output_139_0));
 				float2 lerpResult213 = lerp( _Vector1 , appendResult138 , step( temp_output_139_0 , 1.0 ));
 				float2 uv3151 = lerpResult213;
 				float4 tex2DNode147 = tex2D( _MainTex, uv3151 );
 				float2 texCoord136 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_154_0 = ( texCoord136.y - 0.01194789 );
+				float temp_output_154_0 = ( texCoord136.y - _EdgeSickness );
 				float2 appendResult134 = (float2(texCoord136.x , temp_output_154_0));
 				float2 lerpResult215 = lerp( _Vector1 , appendResult134 , step( 0.0 , temp_output_154_0 ));
 				float2 uv4152 = lerpResult215;
@@ -295,6 +297,7 @@ Shader "Chess"
 			sampler2D _MainTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _RimColor;
+			float _EdgeSickness;
 			CBUFFER_END
 
 
@@ -367,26 +370,26 @@ Shader "Chess"
 
 				float2 _Vector0 = float2(1,1);
 				float2 texCoord118 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_119_0 = ( texCoord118.x + 0.01194789 );
+				float temp_output_119_0 = ( texCoord118.x + _EdgeSickness );
 				float2 appendResult121 = (float2(temp_output_119_0 , texCoord118.y));
 				float2 lerpResult211 = lerp( _Vector0 , appendResult121 , step( temp_output_119_0 , 1.0 ));
 				float2 uv1149 = lerpResult211;
 				float4 tex2DNode123 = tex2D( _MainTex, uv1149 );
 				float2 texCoord128 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_153_0 = ( texCoord128.x - 0.01194789 );
+				float temp_output_153_0 = ( texCoord128.x - _EdgeSickness );
 				float2 appendResult130 = (float2(temp_output_153_0 , texCoord128.y));
 				float2 lerpResult216 = lerp( _Vector0 , appendResult130 , step( 0.0 , temp_output_153_0 ));
 				float2 uv2150 = lerpResult216;
 				float4 tex2DNode146 = tex2D( _MainTex, uv2150 );
 				float2 _Vector1 = float2(1,1);
 				float2 texCoord140 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_139_0 = ( texCoord140.y + 0.01194789 );
+				float temp_output_139_0 = ( texCoord140.y + _EdgeSickness );
 				float2 appendResult138 = (float2(texCoord140.x , temp_output_139_0));
 				float2 lerpResult213 = lerp( _Vector1 , appendResult138 , step( temp_output_139_0 , 1.0 ));
 				float2 uv3151 = lerpResult213;
 				float4 tex2DNode147 = tex2D( _MainTex, uv3151 );
 				float2 texCoord136 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_154_0 = ( texCoord136.y - 0.01194789 );
+				float temp_output_154_0 = ( texCoord136.y - _EdgeSickness );
 				float2 appendResult134 = (float2(texCoord136.x , temp_output_154_0));
 				float2 lerpResult215 = lerp( _Vector1 , appendResult134 , step( 0.0 , temp_output_154_0 ));
 				float2 uv4152 = lerpResult215;
@@ -487,6 +490,7 @@ Shader "Chess"
 			sampler2D _MainTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _RimColor;
+			float _EdgeSickness;
 			CBUFFER_END
 
 
@@ -545,26 +549,26 @@ Shader "Chess"
 			{
 				float2 _Vector0 = float2(1,1);
 				float2 texCoord118 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_119_0 = ( texCoord118.x + 0.01194789 );
+				float temp_output_119_0 = ( texCoord118.x + _EdgeSickness );
 				float2 appendResult121 = (float2(temp_output_119_0 , texCoord118.y));
 				float2 lerpResult211 = lerp( _Vector0 , appendResult121 , step( temp_output_119_0 , 1.0 ));
 				float2 uv1149 = lerpResult211;
 				float4 tex2DNode123 = tex2D( _MainTex, uv1149 );
 				float2 texCoord128 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_153_0 = ( texCoord128.x - 0.01194789 );
+				float temp_output_153_0 = ( texCoord128.x - _EdgeSickness );
 				float2 appendResult130 = (float2(temp_output_153_0 , texCoord128.y));
 				float2 lerpResult216 = lerp( _Vector0 , appendResult130 , step( 0.0 , temp_output_153_0 ));
 				float2 uv2150 = lerpResult216;
 				float4 tex2DNode146 = tex2D( _MainTex, uv2150 );
 				float2 _Vector1 = float2(1,1);
 				float2 texCoord140 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_139_0 = ( texCoord140.y + 0.01194789 );
+				float temp_output_139_0 = ( texCoord140.y + _EdgeSickness );
 				float2 appendResult138 = (float2(texCoord140.x , temp_output_139_0));
 				float2 lerpResult213 = lerp( _Vector1 , appendResult138 , step( temp_output_139_0 , 1.0 ));
 				float2 uv3151 = lerpResult213;
 				float4 tex2DNode147 = tex2D( _MainTex, uv3151 );
 				float2 texCoord136 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_154_0 = ( texCoord136.y - 0.01194789 );
+				float temp_output_154_0 = ( texCoord136.y - _EdgeSickness );
 				float2 appendResult134 = (float2(texCoord136.x , temp_output_154_0));
 				float2 lerpResult215 = lerp( _Vector1 , appendResult134 , step( 0.0 , temp_output_154_0 ));
 				float2 uv4152 = lerpResult215;
@@ -645,6 +649,7 @@ Shader "Chess"
 			sampler2D _MainTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _RimColor;
+			float _EdgeSickness;
 			CBUFFER_END
 
 
@@ -702,26 +707,26 @@ Shader "Chess"
 			{
 				float2 _Vector0 = float2(1,1);
 				float2 texCoord118 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_119_0 = ( texCoord118.x + 0.01194789 );
+				float temp_output_119_0 = ( texCoord118.x + _EdgeSickness );
 				float2 appendResult121 = (float2(temp_output_119_0 , texCoord118.y));
 				float2 lerpResult211 = lerp( _Vector0 , appendResult121 , step( temp_output_119_0 , 1.0 ));
 				float2 uv1149 = lerpResult211;
 				float4 tex2DNode123 = tex2D( _MainTex, uv1149 );
 				float2 texCoord128 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_153_0 = ( texCoord128.x - 0.01194789 );
+				float temp_output_153_0 = ( texCoord128.x - _EdgeSickness );
 				float2 appendResult130 = (float2(temp_output_153_0 , texCoord128.y));
 				float2 lerpResult216 = lerp( _Vector0 , appendResult130 , step( 0.0 , temp_output_153_0 ));
 				float2 uv2150 = lerpResult216;
 				float4 tex2DNode146 = tex2D( _MainTex, uv2150 );
 				float2 _Vector1 = float2(1,1);
 				float2 texCoord140 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_139_0 = ( texCoord140.y + 0.01194789 );
+				float temp_output_139_0 = ( texCoord140.y + _EdgeSickness );
 				float2 appendResult138 = (float2(texCoord140.x , temp_output_139_0));
 				float2 lerpResult213 = lerp( _Vector1 , appendResult138 , step( temp_output_139_0 , 1.0 ));
 				float2 uv3151 = lerpResult213;
 				float4 tex2DNode147 = tex2D( _MainTex, uv3151 );
 				float2 texCoord136 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float temp_output_154_0 = ( texCoord136.y - 0.01194789 );
+				float temp_output_154_0 = ( texCoord136.y - _EdgeSickness );
 				float2 appendResult134 = (float2(texCoord136.x , temp_output_154_0));
 				float2 lerpResult215 = lerp( _Vector1 , appendResult134 , step( 0.0 , temp_output_154_0 ));
 				float2 uv4152 = lerpResult215;
@@ -749,11 +754,11 @@ Shader "Chess"
 }
 /*ASEBEGIN
 Version=19904
-Node;AmplifyShaderEditor.RangedFloatNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;120;-2144,1376;Inherit;False;Constant;_Float0;Float 0;2;0;Create;True;0;0;0;False;0;False;0.01194789;0;0;0.03;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;128;-1488,1168;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;136;-1600,1808;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;140;-1552,1568;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;118;-1664,896;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;120;-2144,1376;Inherit;False;Property;_EdgeSickness;EdgeSickness;2;0;Create;True;0;0;0;False;0;False;0.01194789;0.01194789;0;0.03;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;153;-1200,1184;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;154;-1344,1936;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;139;-1248,1680;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -809,7 +814,7 @@ Node;AmplifyShaderEditor.RangedFloatNode, AmplifyShaderEditor, Version=0.0.0.0, 
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;65;176,-48;Float;False;False;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;66;176,-48;Float;False;False;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;67;176,-48;Float;False;False;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;64;2112,752;Float;False;True;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;18;Chess;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;64;2112,752;Float;False;True;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;18;;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;153;0;128;1
 WireConnection;153;1;120;0
 WireConnection;154;0;136;2
@@ -887,4 +892,4 @@ WireConnection;167;0;124;0
 WireConnection;167;3;166;0
 WireConnection;64;1;167;0
 ASEEND*/
-//CHKSM=ED980A0D987F547207E443036FC933B36245BF2F
+//CHKSM=E8CFE0CB67D458545CFB14758E7F70601BB14F5A

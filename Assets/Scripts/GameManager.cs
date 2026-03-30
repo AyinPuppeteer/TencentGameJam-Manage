@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     /// 当前回合数
     /// </summary>
     private int TurnNum;
+    [SerializeField]
+    private Text TurnText;
     /// <summary>
     /// 回合玩家
     /// </summary>
@@ -73,6 +76,19 @@ public class GameManager : MonoBehaviour
         }
         if (!p1) GameOver(2);
         else if (!p2) GameOver(1);
+        else
+        {
+            bool actable = false;//还有没有能行动的棋子
+            foreach (var chess in ChessSet)
+            {
+                if(chess.Moveable)
+                {
+                    actable = true;
+                    break;
+                }
+            }
+            if (!actable) PhaseShift();
+        }
     }
 
     public void PhaseShift()
@@ -107,7 +123,11 @@ public class GameManager : MonoBehaviour
                     if (chess.Belonging == 1) p1++;
                     else if (chess.Belonging == 2) p2++;
                 }
-                GameOver(p1 > p2 ? 1 : 2);
+                if(p1 == p2)
+                {
+                    GameOver(0);
+                }
+                else GameOver(p1 > p2 ? 1 : 2);
             }
             for (int i = 0; i < 20; i++)
             {
@@ -118,6 +138,7 @@ public class GameManager : MonoBehaviour
         }
 
         TurnNum++;
+        TurnText.text = "Turn " + TurnNum;
     }
 
     public void ClickTile(Tile tile)
@@ -176,6 +197,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(int winner)
     {
-
+        ResultPage.SetText(winner);
+        FadeEvent.Instance.Fadeto("ResultScene");
     }
 }
