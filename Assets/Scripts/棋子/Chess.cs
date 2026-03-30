@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 所有棋子的父类
@@ -39,10 +40,18 @@ public class Chess : MonoBehaviour
         if (Level >= 5) Kill();
     }
 
+    public Image SplitTag;//可分裂记号
+
+    public Image MoveableBar;//体力条
     /// <summary>
     /// 能否行动
     /// </summary>
-    public bool Moveable;
+    public bool Moveable { get; protected set; }
+    public void SetMovable(bool b)
+    {
+        Moveable = b;
+        MoveableBar.enabled = b;
+    }
 
     private void Start()
     {
@@ -132,6 +141,11 @@ public class Chess : MonoBehaviour
     public void SetMat(Material mat)
     {
         Icon.material = new Material(mat);
+    }
+
+    private void Update()
+    {
+        SplitTag.enabled = Level >= 4 && Moveable;
     }
 
     public void Split(Tile tile)

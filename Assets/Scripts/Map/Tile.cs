@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public class Tile : MonoBehaviour
     }
 
     private float PressTimer;//按压计时器
+    [SerializeField]
+    private Image PressCircle;
 
     public void OnMouseDrag()
     {
@@ -76,6 +79,7 @@ public class Tile : MonoBehaviour
         {
             GameManager.Instance.LongPressTile(this);//触发长按
         }
+        PressCircle.fillAmount = PressTimer <= 1f ? PressTimer : 0;
     }
 
     public void OnMouseUp()
@@ -85,11 +89,7 @@ public class Tile : MonoBehaviour
             GameManager.Instance.ClickTile(this);//触发短按
         }
         PressTimer = 0;
-    }
-
-    public void OnMouseExit()
-    {
-        PressTimer = 0;
+        PressCircle.fillAmount = 0;
     }
 
     public void OpenHighlight(bool b, bool split)
